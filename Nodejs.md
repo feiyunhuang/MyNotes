@@ -1,5 +1,3 @@
-[TOC]
-
 ## REPL
 
 ### 下划线 _
@@ -14,7 +12,7 @@
   undefined
   > x + y
   30
-  > var sum = _
+  > var sum = _	// _ 表示获取表达式结果
   undefined
   > console.log(sum)
   30
@@ -25,11 +23,12 @@
 
 
 
-
-
 ## EventEmitter
 
+### eg
+
 ```javascript
+// 引入 events 模块
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 
@@ -78,11 +77,26 @@ listener1 不再受监听。
 程序执行完毕。
 ```
 
+### 属性
 
+#### [参考资料](http://www.runoob.com/nodejs/nodejs-event.html)
+
+#### error 事件
+
+```
+EventEmitter 定义了一个特殊的事件 error，它包含了错误的语义，在遇到异常的时候通常会触发 error 事件。
+当 error 被触发时，EventEmitter 规定如果没有响应的监听器，Node.js 会把它当作异常，退出程序并输出错误信息。
+我们一般要为会触发 error 事件的对象设置监听器，避免遇到错误后整个程序崩溃。
+```
 
 
 
 ## Buffer
+
+```
+JavaScript 语言自身只有字符串数据类型，没有二进制数据类型。
+但在处理像 TCP 流或文件流时，必须使用到二进制数据。因此在 Node.js中，定义了一个 Buffer 类，该类用来创建一个专门存放二进制数据的缓存区。
+```
 
 ### 创建
 
