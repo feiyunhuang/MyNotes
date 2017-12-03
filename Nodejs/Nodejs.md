@@ -471,7 +471,7 @@ Node.js 中的全局对象是 global，所有全局变量（除了 global 本身
 
 
 
-### _filename
+### __filename
 
 ```
 表示当前正在执行的脚本的文件名
@@ -486,7 +486,7 @@ console.log( __filename );
 
 
 
-### _dirname
+### __dirname
 
 表示当前执行脚本所在的目录。
 
@@ -685,10 +685,267 @@ util.isError(object)
 
 ## 文件系统
 
-见 `Nodejs File System.md` 
+> 见 `Nodejs File System.md` 
 
 
 
 
 
 ## GET/POST请求
+
+### 获取GET请求内容
+
+```javascript
+由于 GET 请求直接被嵌入在路径中，URL 是完整的请求路径，包括了?后面的部分，因此可以手动解析后面的内容作为 GET 请求的参数。
+node.js 中 url 模块中的 parse 函数提供了这个功能
+```
+
+```javascript
+// eg
+var http = require('http');
+var url = require('url');
+var util = require('util');
+ 
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
+    res.end(util.inspect(url.parse(req.url, true)));
+}).listen(3000);
+```
+
+```javascript
+在浏览器中访问: http://localhost:3000/user?name=菜鸟教程&url=www.runoob.com
+```
+
+![](../image/testGET.png)
+
+---
+
+
+
+#### 获取 URL 的参数
+
+```javascript
+var http = require('http');
+var url = require('url');
+var util = require('util');
+ 
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+ 
+    // 解析 url 参数
+    var params = url.parse(req.url, true).query;
+    res.write("网站名：" + params.name);
+    res.write("\n");
+    res.write("网站 URL：" + params.url);
+    res.end();
+ 
+}).listen(3000);
+```
+
+```javascript
+在浏览器中访问 http://localhost:3000/user?name=菜鸟教程&url=www.runoob.com 
+```
+
+![](../image/testURL.png)
+
+---
+
+
+
+### 获取 POST 请求内容
+
+```javascript
+POST 请求的内容全部的都在请求体中，http.ServerRequest 并没有一个属性内容为请求体，原因是等待请求体传输可能是一件耗时的工作。
+比如上传文件，而很多时候可能并不需要理会请求体的内容，恶意的 POST 请求会大大消耗服务器的资源，所以 node.js 默认是不会解析请求体的。
+需要的时候可以手动来做。
+```
+
+```javascript
+var http = require('http');
+var querystring = require('querystring');
+ 
+http.createServer(function(req, res){
+    // 定义了一个post变量，用于暂存请求体的信息
+    var post = '';     
+ 
+    // 通过req的data事件监听函数，每当接受到请求体的数据，就累加到post变量中
+    req.on('data', function(chunk){    
+        post += chunk;
+    });
+ 
+    // 在end事件触发后，通过querystring.parse将post解析为真正的POST请求格式，然后向客户端返回。
+    req.on('end', function(){    
+        post = querystring.parse(post);
+        res.end(util.inspect(post));
+    });
+}).listen(3000);
+```
+
+```javascript
+// eg
+var http = require('http');
+var querystring = require('querystring');
+ 
+var postHTML = 
+  '<html><head><meta charset="utf-8"><title>菜鸟教程 Node.js 实例</title></head>' +
+  '<body>' +
+  '<form method="post">' +
+  '网站名： <input name="name"><br>' +
+  '网站 URL： <input name="url"><br>' +
+  '<input type="submit">' +
+  '</form>' +
+  '</body></html>';
+ 
+http.createServer(function (req, res) {
+  var body = "";
+  req.on('data', function (chunk) {
+    body += chunk;
+  });
+  req.on('end', function () {
+    // 解析参数
+    body = querystring.parse(body);
+    // 设置响应头部信息及编码
+    res.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
+ 
+    if(body.name && body.url) { // 输出提交的数据
+        res.write("网站名：" + body.name);
+        res.write("<br>");
+        res.write("网站 URL：" + body.url);
+    } else {  // 输出表单
+        res.write(postHTML);
+    }
+    res.end();
+  });
+}).listen(3000);
+```
+
+
+
+
+
+## 工具模块
+
+>见 `Nodejs 工具模块.md` 
+
+
+
+
+
+## Web 模块
+
+### 创建 Web 服务器
+
+```javascript
+// Node.js 提供了 http 模块，主要用于搭建 HTTP 服务端和客户端
+var http = require('http');
+```
+
+eg:
+
+```javascript
+// 演示一个最基本的 HTTP 服务器架构
+// 使用8081端口
+// 创建 server.js 文件
+var http = require('http');
+var fs = require('fs');
+var url = require('url');
+
+
+// 创建服务器
+http.createServer( function (request, response) {  
+   // 解析请求，包括文件名
+   var pathname = url.parse(request.url).pathname;
+   
+   // 输出请求的文件名
+   console.log("Request for " + pathname + " received.");
+   
+   // 从文件系统中读取请求的文件内容
+   fs.readFile(pathname.substr(1), function (err, data) {
+      if (err) {
+         console.log(err);
+         // HTTP 状态码: 404 : NOT FOUND
+         // Content Type: text/plain
+         response.writeHead(404, {'Content-Type': 'text/html'});
+      }else{             
+         // HTTP 状态码: 200 : OK
+         // Content Type: text/plain
+         response.writeHead(200, {'Content-Type': 'text/html'});    
+         
+         // 响应文件内容
+         response.write(data.toString());        
+      }
+      //  发送响应数据
+      response.end();
+   });   
+}).listen(8081);
+
+// 控制台会输出以下信息
+console.log('Server running at http://127.0.0.1:8081/');
+```
+
+```html
+// 创建 index.htm 文件
+<html>
+<head>
+<title>Sample Page</title>
+</head>
+<body>
+Hello World!
+</body>
+</html>
+```
+
+
+
+### 创建 Web 客户端
+
+eg:
+
+```javascript
+// 创建 client.js 文件
+var http = require('http');
+
+// 用于请求的选项
+var options = {
+   host: 'localhost',
+   port: '8081',
+   path: '/index.html'  
+};
+
+// 处理响应的回调函数
+var callback = function(response){
+   // 不断更新数据
+   var body = '';
+   response.on('data', function(data) {
+      body += data;
+   });
+   
+   response.on('end', function() {
+      // 数据接收完成
+      console.log(body);
+   });
+}
+// 向服务端发送请求
+var req = http.request(options, callback);
+req.end();
+```
+
+```javascript
+// $ node client.js
+// output:
+<html>
+<head>
+<title>Sample Page</title>
+</head>
+<body>
+Hello World!
+</body>
+</html>
+```
+
+
+
+
+
+
+
