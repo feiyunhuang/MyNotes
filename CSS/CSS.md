@@ -2,7 +2,7 @@
 
 ## 选择器
 * CSS选择器
-![](image/CSS 选择器.jpg)
+  ![](../image/CSS 选择器.jpg)
 
 ### id选择器
 
