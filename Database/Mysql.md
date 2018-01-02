@@ -22,6 +22,8 @@ CREATE TABLE tableName(
 
 ### 连接
 
+* jdbc
+
 ```java
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -47,7 +49,7 @@ public class database {
 		}
 	}
 	
-	protected static Connection getConnection(){
+	protected static Connection getInstance(){
 		return connect;
 	}
 }
