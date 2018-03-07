@@ -16,6 +16,18 @@
 
 
 
+[SpringMVC如何引入css文件](http://blog.csdn.net/buhuikanjian/article/details/53455247)
+
+[jquery实时监听输入框值变化](http://blog.csdn.net/otengyue/article/details/50708277)
+
+[js/jq实现获取手机验证码倒计时效果](https://www.cnblogs.com/youyuekeji/p/5580344.html)
+
+
+
+[浏览器开发者工具基本使用教程](https://www.cnblogs.com/mojita/p/5769350.html)
+
+
+
 ```
 
 ```
