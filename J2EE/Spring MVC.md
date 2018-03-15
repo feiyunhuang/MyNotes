@@ -10,7 +10,7 @@
 
 [SpringMVC 快速入门](https://www.cnblogs.com/gefenghua/p/6556930.html)
 
-[ Spring MVC 转发和重定向](http://blog.csdn.net/webzhuce/article/details/54564608)
+[Spring MVC 转发和重定向](http://blog.csdn.net/webzhuce/article/details/54564608)
 
 [springmvc常用注解标签详解](http://www.cnblogs.com/leskang/p/5445698.html)
 
@@ -24,7 +24,15 @@
 
 
 
-[浏览器开发者工具基本使用教程](https://www.cnblogs.com/mojita/p/5769350.html)
+[使用Spring JDBCTemplate简化JDBC的操作](https://www.cnblogs.com/liaojie970/p/7639930.html)
+
+
+
+[@ResponseBody 返回 List<Object> 报错](https://www.cnblogs.com/hafiz/p/5812873.html)
+
+```
+nested exception is java.lang.IllegalArgumentException: No converter found for return value of type: class java.util.ArrayList
+```
 
 
 
