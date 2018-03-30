@@ -97,6 +97,10 @@ UNIX_TIMESTAMP(endDateTime) - UNIX_TIMESTAMP(beginDateTime)
 TIME_TO_SEC(endDateTime) - TIME_TO_SEC(beginDateTime)
 ```
 
+[mysql datetime 类型与java.util.Date类型的值如何比较](https://segmentfault.com/q/1010000008617215)
+
+[mysql中类型为datetime的时间比较](https://segmentfault.com/q/1010000003055302)
+
 
 
 ### 字符串转 int / double
@@ -129,6 +133,10 @@ eg:
 
 
 
+
+```
+
+```
 
 
 

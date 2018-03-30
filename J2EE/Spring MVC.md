@@ -36,6 +36,18 @@ nested exception is java.lang.IllegalArgumentException: No converter found for r
 
 
 
+[使用jackson来进行数组格式的json字符串转换成List。](https://www.cnblogs.com/dupang/p/5673097.html)
+
+
+
+[Spring JdbcTemplate batchUpdate() 实例](https://www.cnblogs.com/soundcode/p/6367566.html)
+
+
+
+[JavaWeb 项目启动时，后台开启一个线程的方法](http://blog.csdn.net/it_beecoder/article/details/78446747)
+
+
+
 ```
 
 ```
