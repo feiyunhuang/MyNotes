@@ -38,6 +38,11 @@
 >
 >[find命令之exec](http://www.cnblogs.com/peida/archive/2012/11/14/2769248.html)
 >
+
+
+
+>[linux shell数据重定向（输入重定向与输出重定向）详细分析](https://www.cnblogs.com/chengmo/archive/2010/10/20/1855805.html)
+>
 >
 
 
