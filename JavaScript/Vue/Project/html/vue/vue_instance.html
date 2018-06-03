@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Instance</title>
+</head>
+<body style="text-align: center">
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery-3.3.1.min.js"></script>
+
+<!-- 数据与方法 -->
+<script>
+    var data = { data : 1 };
+    var app1 = new Vue({
+        data : data
+    });
+
+    console.log( app1.$data === data );
+</script>
+
+<!--<hr>-->
+<!--<hr>-->
+
+<!-- 插值 -->
+<div id="app1">
+    <span v-html="rawHtml"></span>
+    <div v-bind:style="style">hello</div>
+    <div :style="style">hello</div>
+    <button v-on:click="test">click here</button>
+    <button @click="test">click here</button>
+</div>
+<script>
+    var app1 = new Vue({
+        el : "#app1",
+        data : {
+            style : "color:red",
+            rawHtml : "<span style='color:red'>This should be red</span>",
+        },
+        methods : {
+            test : function () {
+                alert("test");
+            }
+        }
+    });
+</script>
+
+<hr>
+<hr>
+
+<!-- 计算属性 -->
+<div id="app2">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+
+<script>
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: 'Hello'
+        },
+        computed: {
+            // 计算属性的 getter
+            reversedMessage: function () {
+                // `this` 指向 vm 实例
+                return this.message.split('').reverse().join('')
+            }
+        },
+    });
+//    这里我们声明了一个计算属性 reversedMessage。
+//    提供的函数将用作属性 vm.reversedMessage 的 getter 函数
+</script>
+
+<!---->
+</body>
+</html>
