@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Command</title>
+</head>
+<body style="text-align: center">
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery-3.3.1.min.js"></script>
+
+<!-- v-if -->
+<div id="app1">
+    <div v-if="kind_1">
+        <p>kind 1</p>
+    </div>
+    <div v-else-if="kind_2">
+        <p>kind 2</p>
+    </div>
+    <div v-else>
+        <p>other kind</p>
+    </div>
+</div>
+<script>
+    var app1 = new Vue({
+        el : "#app1",
+        data : {
+            kind_1 : true,
+            kind_2 : false
+        }
+    });
+</script>
+
+<div id="app2">
+    <div v-if="kind_1">
+        <p>kind 1</p>
+    </div>
+    <div v-else-if="kind_2">
+        <p>kind 2</p>
+    </div>
+    <div v-else>
+        <p>other kind</p>
+    </div>
+</div>
+<script>
+    var app2 = new Vue({
+        el : "#app2",
+        data : {
+            kind_1 : false,
+            kind_2 : true
+        }
+    });
+</script>
+
+<!-- v-show -->
+<div id="app3">
+    <div v-show="kind_1">
+        <p>kind 1</p>
+    </div>
+</div>
+<script>
+    var app3 = new Vue({
+        el : "#app3",
+        data : {
+            kind_1 : false,
+        }
+    });
+</script>
+
+<div id="app4">
+    <div v-show="kind_1">
+        <p>kind 1</p>
+    </div>
+</div>
+<script>
+    var app4 = new Vue({
+        el : "#app4",
+        data : {
+            kind_1 : true,
+        }
+    });
+</script>
+</body>
+</html>
