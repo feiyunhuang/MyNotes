@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Form</title>
+</head>
+<body style="text-align: center">
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery-3.3.1.min.js"></script>
+
+<!-- 复选框 -->
+<div id='example-3'>
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span>
+</div>
+<script>
+    new Vue({
+        el: '#example-3',
+        data: {
+            checkedNames: []
+        }
+    })
+</script>
+
+<hr>
+
+<!-- 单选按钮 -->
+<div id="example-4">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+</div>
+<script>
+    new Vue({
+        el: '#example-4',
+        data: {
+            picked: ''
+        }
+    })
+</script>
+
+<hr>
+
+<!-- 多选列表 -->
+<div id="example-6">
+    <select v-model="selected" multiple style="width: 50px;">
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected }}</span>
+</div>
+<script>
+    new Vue({
+        el: '#example-6',
+        data: {
+            selected: []
+        }
+    })
+</script>
+
+<hr>
+<hr>
+
+<!-- 修饰符 -->
+<input v-model.number="age" type="number">
+<input v-model.trim="msg">
+</body>
+</html>
